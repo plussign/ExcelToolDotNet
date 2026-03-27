@@ -3,9 +3,7 @@ using libxl;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace ExcelTool
@@ -16,7 +14,7 @@ namespace ExcelTool
         private OutputConfig preCheckOutput;
         private FieldConfig preCheckFieldConfig;
         private List<string> preCheckPrimarys;
-        private int preCheckNum = 0;
+        //private int preCheckNum = 0;
         // 预加载检测配置
         public bool PreCheckLoad(string configName)
         {

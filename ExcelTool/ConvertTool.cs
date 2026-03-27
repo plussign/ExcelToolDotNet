@@ -17,7 +17,7 @@ namespace ExcelTool
         private FieldConfig fieldConfig;
         private List<string> primarys;
         private EnumManager checkEnumList;
-        private Dictionary<string, string> checkHints = new Dictionary<string, string>();
+        //private Dictionary<string, string> checkHints = new Dictionary<string, string>();
         private Dictionary<string /* 缓存的表 */ , Dictionary<string /* 缓存的列名*/, Dictionary<int,string> /*某一列的集合 */ >> allLoadCfgData =
             new Dictionary<string, Dictionary<string, Dictionary<int, string>>>();
 
@@ -27,7 +27,7 @@ namespace ExcelTool
 
         private string luaDefine = "";
         private string luaEnumText = "";
-        private string heroPropDefine = "";
+        //private string heroPropDefine = "";
         private string goEnumText = "";
 
         private string cppDefine = "";
@@ -370,7 +370,7 @@ namespace ExcelTool
             erlDefine = "-ifndef(_CSV_HRL__).\n-define(_CSV_HRL__, true).\n\n" + erlDefine;
 
             luaDefine = "TableDefine=\n{\n";
-            heroPropDefine = "module(\"BattleAttrMap\", package.seeall)\nStringAttr ={\n";
+            //heroPropDefine = "module(\"BattleAttrMap\", package.seeall)\nStringAttr ={\n";
 
             if (!string.IsNullOrEmpty(Program.csv_translation_excel))
             {

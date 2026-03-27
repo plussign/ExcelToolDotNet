@@ -16,7 +16,7 @@
       "name": "Run ExcelTool (No Debug)",
       "type": "node-terminal",
       "request": "launch",
-      "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location '${workspaceFolder}\\..\\Master\\Config'; & '${workspaceFolder}\\bin\\Debug\\net9.0\\ExcelTool.exe'\"",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location '${workspaceFolder}\\..\\Master\\Config'; & '${workspaceFolder}\\bin\\Release\\net9.0\\win-x64\\publish\\ExcelTool.exe'\"",
       "preLaunchTask": "build"
     },
     {

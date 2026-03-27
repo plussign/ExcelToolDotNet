@@ -2,14 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 class SheetCacheMgr
 {
-    static MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+    private static byte[] ComputeMd5(byte[] data)
+    {
+        return MD5.HashData(data);
+    }
+
+    private static byte[] ComputeMd5FromFile(string filename)
+    {
+        using FileStream stream = File.OpenRead(filename);
+        return MD5.HashData(stream);
+    }
 
     public class CacheWrite
     {
@@ -81,7 +87,7 @@ class SheetCacheMgr
     public static string getCacheFilename(string filename)
     {
         string str = string.Empty;
-        byte[] bytes = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(filename));
+        byte[] bytes = ComputeMd5(System.Text.Encoding.Default.GetBytes(filename));
         for (int i = 0; i < bytes.Length; i++)
         {
             str += bytes[i].ToString("x2");
@@ -96,7 +102,7 @@ class SheetCacheMgr
 
         if (Program.useXlsCache)
         {
-            byte[] sourceMd5 = md5.ComputeHash(File.ReadAllBytes(filename));
+            byte[] sourceMd5 = ComputeMd5FromFile(filename);
             cache.SaveCachFile(sourceMd5, getCacheFilename(filename));
         }
     }
@@ -113,7 +119,7 @@ class SheetCacheMgr
             string cacheFile = getCacheFilename(filename);
             if (File.Exists(cacheFile))
             {
-                byte[] sourceMd5 = md5.ComputeHash(File.ReadAllBytes(filename));
+                byte[] sourceMd5 = ComputeMd5FromFile(filename);
                 byte[] cacheBytes = File.ReadAllBytes(cacheFile);
                 for (int i = 0; i < sourceMd5.Length; ++i)
                 {

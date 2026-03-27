@@ -55,7 +55,7 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "publish-win-x64",
+      "label": "publish-trimmed-win-x64",
       "type": "shell",
       "command": "dotnet",
       "args": [
@@ -66,7 +66,9 @@
         "-r",
         "win-x64",
         "--self-contained",
-        "-p:PublishSingleFile=true"
+        "-p:PublishSingleFile=true",
+        "-p:PublishTrimmed=true",
+        "-p:TrimMode=partial"
       ],
       "problemMatcher": "$msCompile"
     },
@@ -82,7 +84,9 @@
         "-r",
         "osx-arm64",
         "--self-contained",
-        "-p:PublishSingleFile=true"
+        "-p:PublishSingleFile=true",
+        "-p:PublishTrimmed=true",
+        "-p:TrimMode=partial"
       ],
       "problemMatcher": "$msCompile"
     }

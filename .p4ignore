@@ -1,0 +1,54 @@
+# Build output
+bin/
+obj/
+debug/
+release/
+x64/
+x86/
+ARM/
+ARM64/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE/editor folders
+.vs/
+.idea/
+
+# Rider
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Test results
+TestResult*/
+TestResults/
+*.trx
+
+# Logs
+*.log
+
+# Generated files
+Generated Files/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Publish output
+publish/
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# Local tools cache
+.dotnet/

@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch ExcelTool (.NET 9)",
+      "name": "Launch ExcelTool (DEBUG)",
       "type": "coreclr",
       "request": "launch",
       "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
@@ -20,7 +20,7 @@
       "preLaunchTask": "build"
     },
     {
-      "name": "Launch ExcelTool Release (.NET 9)",
+      "name": "Launch ExcelTool Release",
       "type": "coreclr",
       "request": "launch",
       "program": "${workspaceFolder}/bin/Release/net9.0/ExcelTool.exe",

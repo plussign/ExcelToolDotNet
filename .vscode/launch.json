@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch ExcelTool (.NET 9)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
+      "args": [],
+      "cwd": "..\\Master\\Config",
+      "preLaunchTask": "build",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run ExcelTool (No Debug)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location '${workspaceFolder}\\..\\Master\\Config'; & '${workspaceFolder}\\bin\\Debug\\net9.0\\ExcelTool.exe'\"",
+      "preLaunchTask": "build"
+    },
+    {
+      "name": "Launch ExcelTool Release (.NET 9)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/Release/net9.0/ExcelTool.exe",
+      "args": [],
+      "cwd": "..\\Master\\Config",
+      "preLaunchTask": "build-release",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+namespace libxl
+{
+    public enum CellType
+    {
+        CELLTYPE_EMPTY, CELLTYPE_NUMBER, CELLTYPE_STRING, CELLTYPE_BOOLEAN, CELLTYPE_BLANK, CELLTYPE_ERROR
+    }
+}

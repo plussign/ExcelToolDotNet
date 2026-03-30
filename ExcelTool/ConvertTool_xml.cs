@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 
@@ -22,7 +23,13 @@ namespace ExcelTool
                 string cellString = string.Empty;
                 if (!field.client_only)
                 {
-                    cellString = string.Format(" {0}=\"{1}\"", field.name, cellData.GetOrginalString());
+                    string cellValue = cellData.GetOrginalString();
+                    cellValue = cellValue.Replace("&", "&amp;");
+                    cellValue = cellValue.Replace("<", "&lt;");
+                    cellValue = cellValue.Replace(">", "&gt;");
+                    cellValue = cellValue.Replace("'", "&apos;");
+                    cellValue = cellValue.Replace("\"", "&quot;");
+                    cellString = string.Format(" {0}=\"{1}\"", field.name, cellValue);
                     content.Append(cellString);
                 }
             }

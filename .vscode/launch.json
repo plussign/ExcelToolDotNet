@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch ExcelTool (DEBUG)",
+      "name": "Launch ExcelTool (.NET 9)",
       "type": "coreclr",
       "request": "launch",
       "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
@@ -20,7 +20,18 @@
       "preLaunchTask": "build"
     },
     {
-      "name": "Launch ExcelTool Release",
+      "name": "Launch ExcelTool macOS (Debug)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool",
+      "args": [],
+      "cwd": "${workspaceFolder}/../Master/Config",
+      "preLaunchTask": "build",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Launch ExcelTool Release (.NET 9)",
       "type": "coreclr",
       "request": "launch",
       "program": "${workspaceFolder}/bin/Release/net9.0/ExcelTool.exe",

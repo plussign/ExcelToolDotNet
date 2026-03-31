@@ -115,6 +115,7 @@ namespace ExcelTool
                     foreach (XmlElement child in node)
                     {
                         string fname = child.GetAttribute("file");
+                        fname = fname.Replace("\\", "/");
                         bool sourceDynamic = (child.GetAttribute("dynamic") == "true");
                         AddFile(fname, sourceDynamic);
                     }

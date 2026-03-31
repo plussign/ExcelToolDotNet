@@ -85,8 +85,8 @@
         "osx-arm64",
         "--self-contained",
         "-p:PublishSingleFile=true",
-        "-p:PublishTrimmed=true",
-        "-p:TrimMode=partial"
+        //"-p:PublishTrimmed=true",
+        //"-p:TrimMode=partial"
       ],
       "problemMatcher": "$msCompile"
     }

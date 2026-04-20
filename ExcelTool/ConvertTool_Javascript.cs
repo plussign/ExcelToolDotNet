@@ -23,20 +23,20 @@ namespace ExcelTool
 
                 if (field.isPrimary)
                 {
-                    primary = _fmtstr(input[i].GetOrginalString()) + ":";
+                    primary = _fmtstr(input[i].GetOriginalString()) + ":";
                 }
 
                 if (field.mType == "string")
                 {
-                    s = _fmtstr(input[i].GetOrginalString());
+                    s = _fmtstr(input[i].GetOriginalString());
                 }
                 else if (field.mType == "int" || field.mType == "double")
                 {
-                    s = input[i].GetOrginalString();
+                    s = input[i].GetOriginalString();
                 }
                 else
                 {
-                    s = _fmtstr(input[i].GetOrginalString());
+                    s = _fmtstr(input[i].GetOriginalString());
                 }
 
                 if (i > 0)

@@ -2,7 +2,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch ExcelTool (.NET 9)",
+      "name": "Debug ExcelTool 增量提取文字",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
+      "args": ["-extra_text"],
+      "cwd": "..\\Master\\Config",
+      "preLaunchTask": "build",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug ExcelTool 全新提取文字",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
+      "args": ["-extra_text", "-clean_extra_text"],
+      "cwd": "..\\Master\\Config",
+      "preLaunchTask": "build",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug ExcelTool 转表",
       "type": "coreclr",
       "request": "launch",
       "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",

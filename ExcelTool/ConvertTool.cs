@@ -343,11 +343,11 @@ namespace ExcelTool
                 ExcelField field = fieldConfig.excelFields[i];
                 if (field.isPrimary)
                 {
-                    key = input[i].GetOrginalString();
+                    key = input[i].GetOriginalString();
                 }
                 else if (field.enum_value)
                 {
-                    value = input[i].GetOrginalString();
+                    value = input[i].GetOriginalString();
                 }
             }
 

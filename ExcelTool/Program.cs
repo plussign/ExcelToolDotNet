@@ -10,6 +10,7 @@ namespace ExcelTool
         static public bool outputLog = true;
         static public bool fastConvert = false;
         static public bool i18nExtraOnly = false;
+        static public bool i18nExtraClean = false;
         static public bool isDynamicOutPut = false;
         static public bool outputCSharpAccessInterface = false;
         static public string special_channel = string.Empty;
@@ -48,6 +49,12 @@ namespace ExcelTool
                     {
                         fastConvert = true;
                         i18nExtraOnly = true;
+                    }
+                    break;
+
+                case "-clean_extra_text":
+                    {
+                        i18nExtraClean = true;
                     }
                     break;
 
@@ -91,12 +98,12 @@ namespace ExcelTool
 
             if (!string.IsNullOrEmpty(special_channel))
             {
-                Log.WriteLine(">>>>>> ���������������[{0}]", special_channel);
+                Log.WriteLine(">>>>>> 大区特殊输入表格[{0}]", special_channel);
             }
 
             if (!string.IsNullOrEmpty(csv_translation_excel))
             {
-                Log.WriteLine(">>>>>> csv���������ļ�[{0}]", csv_translation_excel);
+                Log.WriteLine(">>>>>> csv词条翻译文件[{0}]", csv_translation_excel);
             }
 			
         }
@@ -110,8 +117,8 @@ namespace ExcelTool
 
             if (!fastConvert)
             {
-                // Ԥ�ȼ�����Ҫ���ü����ļ�
-                Log.WriteLine("��ʼǰ��У���ļ�����, ��ȴ�10����\n");
+                // 预先加载需要配置检测的文件
+                Log.WriteLine("开始前置校验文件加载, 请等待10秒钟\n");
             }
 			
             DirectoryInfo TheFolder = new DirectoryInfo("config");
@@ -119,27 +126,27 @@ namespace ExcelTool
 
             if (!fastConvert)
             {
-                // Ԥ�ȼ�����Ҫ���ü����ļ�
+                // 预先加载需要配置检测的文件
                 foreach (FileInfo fileInfo in xmlFiles)
                 {
                     if (!convert.PreCheckLoad(fileInfo.Name))
                     {
-                        GlobeError.Push("�����ļ�ʧ��:" + fileInfo.Name + "\n");
+                        GlobeError.Push("处理文件失败:" + fileInfo.Name + "\n");
                         GlobeError.Report();
                         Console.ReadKey();
                         return -1;
                     }
                 }
 
-                Log.WriteLine("\n�����������ù�ϵ�����ϣ�ת�����ݱ�\n");
+                Log.WriteLine("\n表格数据引用关系检查完毕，转换数据表\n");
             }
 
-            //�����ļ�
+            //遍历文件
             foreach (FileInfo fileInfo in xmlFiles)
             {
                 if (!convert.Convert(fileInfo.Name))
                 {
-                    GlobeError.Push("�����ļ�ʧ��:" + fileInfo.Name + "\n");
+                    GlobeError.Push("处理文件失败:" + fileInfo.Name + "\n");
 
                     GlobeError.Report();
                     Console.ReadKey();
@@ -154,7 +161,8 @@ namespace ExcelTool
             }
             else
             {
-                I18N.i18nSync();
+                I18N.i18nSync(i18nExtraClean);
+                I18N.WriteLanguageTables();
             }
 
             if (GlobeError.Report())

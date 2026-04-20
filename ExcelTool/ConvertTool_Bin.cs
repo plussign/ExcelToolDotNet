@@ -53,7 +53,7 @@ namespace ExcelTool
 
                 if (field.mType == "string")
                 {
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input[i].GetOrginalString());
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input[i].GetOriginalString());
                     int len = bytes.Length;
                     byte[] buf2 = BitConverter.GetBytes(len);
                     byte b1 = (byte)(len >> 24);
@@ -64,12 +64,12 @@ namespace ExcelTool
                 }
                 else if (field.mType == "double" || field.mType == "number")
                 {
-                    byte[] buf = BitConverter.GetBytes(float.Parse(input[i].GetOrginalString()));
+                    byte[] buf = BitConverter.GetBytes(float.Parse(input[i].GetOriginalString()));
                     allLine.Add(buf);
                 }
                 else
                 {
-                    byte[] buf = BitConverter.GetBytes(int.Parse(input[i].GetOrginalString()));
+                    byte[] buf = BitConverter.GetBytes(int.Parse(input[i].GetOriginalString()));
                     allLine.Add(buf);
                 }
             }

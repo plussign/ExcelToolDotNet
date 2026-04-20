@@ -39,11 +39,11 @@ namespace ExcelTool
                 {
                     if (isStringField)
                     {
-                        cellString = Assist.ToGoStr(cellData.GetOrginalString());
+                        cellString = Assist.ToGoStr(cellData.GetOriginalString());
                     }
                     else
                     {
-                        cellString = cellData.GetOrginalString();
+                        cellString = cellData.GetOriginalString();
                     }
 
                     if (content.Length > 0)
@@ -57,11 +57,11 @@ namespace ExcelTool
                     {
                         if (!field.mType.Equals("string"))
                         {
-                            key = cellData.GetOrginalString();
+                            key = cellData.GetOriginalString();
                         }
                         else
                         {
-                            key = Assist.ToGoStr(cellData.GetOrginalString());
+                            key = Assist.ToGoStr(cellData.GetOriginalString());
                         }
                     }
                 }

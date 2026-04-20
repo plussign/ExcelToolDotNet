@@ -70,7 +70,7 @@ namespace ExcelTool
             return stringIndex;
         }
 
-        public string GetOrginalString()
+        public string GetOriginalString()
         {
             return standardString;
         }
@@ -276,11 +276,6 @@ namespace ExcelTool
                             if (textIndex > 0)
                             {
                                 stringIndex = textIndex;
-                            }
-
-                            if (field.sdf_text)
-                            {
-                                I18N.RegisterSDFText(s);
                             }
                         }
                     }

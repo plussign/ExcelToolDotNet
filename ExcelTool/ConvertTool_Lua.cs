@@ -42,7 +42,7 @@ namespace ExcelTool
                     {
                         if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                         {
-                            uint textIndex = I18N.RegisterText(cellData.GetOrginalString(), false);
+                            uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                             if (textIndex > 0)
                             {
                                 cellString = string.Format("{0}", textIndex);
@@ -50,7 +50,7 @@ namespace ExcelTool
                             else
                             {
                                 //未放入词条表的表格内字符串，需要进行Lua字符串格式调整
-                                cellString = Assist.ToLuaStr(cellData.GetOrginalString());
+                                cellString = Assist.ToLuaStr(cellData.GetOriginalString());
                             }
                         }
                         else
@@ -62,7 +62,7 @@ namespace ExcelTool
                     }
                     else
                     {
-                        cellString = cellData.GetOrginalString();
+                        cellString = cellData.GetOriginalString();
                     }
 
                     if (content.Length > 0)
@@ -82,11 +82,11 @@ namespace ExcelTool
                 {
                     if (!field.mType.Equals("string"))
                     {
-                        key = cellData.GetOrginalString();
+                        key = cellData.GetOriginalString();
                     }
                     else
                     {
-                        key = Assist.ToLuaStr(cellData.GetOrginalString());
+                        key = Assist.ToLuaStr(cellData.GetOriginalString());
                     }
                 }
             }
@@ -136,7 +136,7 @@ namespace ExcelTool
                 {
                     if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                     {
-                        uint textIndex = I18N.RegisterText(cellData.GetOrginalString(), false);
+                        uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                         if (textIndex > 0)
                         {
                             cellString = Assist.ToLuaStr("$$" + textIndex);
@@ -144,7 +144,7 @@ namespace ExcelTool
                         else
                         {
                             //未放入词条表的表格内字符串，需要进行Lua字符串格式调整
-                            cellString = Assist.ToLuaStr(cellData.GetOrginalString());
+                            cellString = Assist.ToLuaStr(cellData.GetOriginalString());
                         }
                     }
                     else
@@ -156,7 +156,7 @@ namespace ExcelTool
                 }
                 else
                 {
-                    cellString = cellData.GetOrginalString();
+                    cellString = cellData.GetOriginalString();
                 }
 
 
@@ -171,11 +171,11 @@ namespace ExcelTool
                 {
                     if (!field.mType.Equals("string"))
                     {
-                        key = cellData.GetOrginalString();
+                        key = cellData.GetOriginalString();
                     }
                     else
                     {
-                        key = Assist.ToLuaStr(cellData.GetOrginalString());
+                        key = Assist.ToLuaStr(cellData.GetOriginalString());
                     }
                 }
             }

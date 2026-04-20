@@ -25,7 +25,7 @@ namespace ExcelTool
                 {
                     if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                     {
-                        uint textIndex = I18N.RegisterText(cellData.GetOrginalString(), false);
+                        uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                         if (textIndex > 0)
                         {
                             cellString = textIndex.ToString();
@@ -47,7 +47,7 @@ namespace ExcelTool
                     //int double 或者枚举值类型的单元格
                     if (!cellData.IsBlank)
                     {
-                        cellString = cellData.GetOrginalString();
+                        cellString = cellData.GetOriginalString();
                     }
                     else
                     {

@@ -23,7 +23,7 @@ namespace ExcelTool
                 string cellString = string.Empty;
                 if (!field.client_only)
                 {
-                    string cellValue = cellData.GetOrginalString();
+                    string cellValue = cellData.GetOriginalString();
                     cellValue = cellValue.Replace("&", "&amp;");
                     cellValue = cellValue.Replace("<", "&lt;");
                     cellValue = cellValue.Replace(">", "&gt;");

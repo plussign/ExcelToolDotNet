@@ -52,7 +52,7 @@ namespace ExcelTool
                         {
                             if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                             {
-                                uint textIndex = I18N.RegisterText(cellData.GetOrginalString(), false);
+                                uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                                 if (textIndex > 0)
                                 {
                                     cellString = textIndex.ToString();
@@ -74,7 +74,7 @@ namespace ExcelTool
                             //int double 或者枚举值类型的单元格
                             if (!cellData.IsBlank)
                             {
-                                cellString = cellData.GetOrginalString();
+                                cellString = cellData.GetOriginalString();
                             }
                             else
                             {
@@ -135,14 +135,14 @@ namespace ExcelTool
                     {
                         if (!field.mType.Equals("string"))
                         {
-                            if (!int.TryParse(cellData.GetOrginalString(), out keyint))
+                            if (!int.TryParse(cellData.GetOriginalString(), out keyint))
                             {
                                 throw new Exception("无法转换int值");
                             }
                         }
                         else
                         {
-                            key = cellData.GetOrginalString();
+                            key = cellData.GetOriginalString();
                             if ("SESSION_PLAYER_PREPARE" == key)
                             {
                                 string kfoa = key;
@@ -228,7 +228,7 @@ namespace ExcelTool
 
                     if (isStringField)
                     {
-                        bw.Write(cellData.GetOrginalString());
+                        bw.Write(cellData.GetOriginalString());
                     }
                     else
                     {
@@ -238,7 +238,7 @@ namespace ExcelTool
                             if (!field.mType.Equals("double"))
                             {
 
-                                if (int.TryParse(cellData.GetOrginalString(), out int intValue))
+                                if (int.TryParse(cellData.GetOriginalString(), out int intValue))
                                 {
                                     bw.Write(intValue);
                                 }
@@ -249,7 +249,7 @@ namespace ExcelTool
                             }
                             else
                             {
-                                if (float.TryParse(cellData.GetOrginalString(), out float floatValue))
+                                if (float.TryParse(cellData.GetOriginalString(), out float floatValue))
                                 {
                                     bw.Write(floatValue);
                                 }

@@ -40,7 +40,12 @@ namespace ExcelTool
 
                     if (isStringField)
                     {
-                        if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
+                        if (field.raw_string)
+                        {
+                            //raw_string字段不进行字符串表处理，直接输出原始字符串
+                            cellString = Assist.ToLuaStr(cellData.GetOriginalString());
+                        }
+                        else if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                         {
                             uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                             if (textIndex > 0)
@@ -134,7 +139,12 @@ namespace ExcelTool
 
                 if (isStringField)
                 {
-                    if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
+                    if (field.raw_string)
+                    {
+                        //raw_string字段不进行字符串表处理，直接输出原始字符串
+                        cellString = Assist.ToLuaStr(cellData.GetOriginalString());
+                    }
+                    else if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                     {
                         uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                         if (textIndex > 0)

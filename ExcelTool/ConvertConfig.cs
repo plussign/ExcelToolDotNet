@@ -30,6 +30,8 @@ namespace ExcelTool
         public string target_compare;
         public string bin_to;
 
+        public bool raw_string;
+
         public bool skip_export_bin
         {
             get 

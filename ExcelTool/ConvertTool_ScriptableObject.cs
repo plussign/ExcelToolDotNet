@@ -23,7 +23,11 @@ namespace ExcelTool
 
                 if (isStringField)
                 {
-                    if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
+                    if (field.raw_string)
+                    {
+                        cellString = cellData.GetOriginalString();
+                    }
+                    else if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                     {
                         uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
                         if (textIndex > 0)

@@ -71,6 +71,7 @@ namespace ExcelTool
                     field.sdf_text = node.GetAttribute("sdf_text") == "true";
                     field.min_num = node.GetAttribute("min_num");
                     field.max_num = node.GetAttribute("max_num");
+                    field.raw_string = node.GetAttribute("raw_string") == "true";
                     field.i_should_be_bigger_than_t = node.GetAttribute("i_should_be_bigger_than_t") == "true";
                     field.t_should_be_bigger_than_i = node.GetAttribute("t_should_be_bigger_than_i") == "true";
                     field.i_should_like_t = node.GetAttribute("i_should_like_t") == "true";

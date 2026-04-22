@@ -145,7 +145,7 @@ namespace ExcelTool
 
                 if (Program.i18nExtraOnly)
                 {
-                    if (!field.mType.Equals("string") || !field.is_text)
+                    if (!field.mType.Equals("string") || !field.is_text || field.raw_string)
                     {
                         continue;
                     }
@@ -272,10 +272,13 @@ namespace ExcelTool
                                 }
                             }*/
 
-                            uint textIndex = I18N.RegisterText(s, false);
-                            if (textIndex > 0)
+                            if (!field.raw_string)
                             {
-                                stringIndex = textIndex;
+                                uint textIndex = I18N.RegisterText(s, false);
+                                if (textIndex > 0)
+                                {
+                                    stringIndex = textIndex;
+                                }
                             }
                         }
                     }

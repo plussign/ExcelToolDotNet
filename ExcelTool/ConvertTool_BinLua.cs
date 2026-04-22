@@ -50,41 +50,46 @@ namespace ExcelTool
 
                         if (isStringField)
                         {
-                            if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
+                            if (field.raw_string)
                             {
-                                uint textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
-                                if (textIndex > 0)
-                                {
-                                    cellString = textIndex.ToString();
-                                }
-                                else
-                                {
-                                    cellString = "0";
-                                }
+                                //raw_string字段直接写入UTF8字符串
+                                byte[] strBytes = Encoding.UTF8.GetBytes(cellData.GetOriginalString());
+                                memContent.Write(BitConverter.GetBytes(strBytes.Length), 0, 4);
+                                memContent.Write(strBytes, 0, strBytes.Length);
                             }
                             else
                             {
-                                //索引词条表
-                                uint strId = cellData.GetStringIndex();
-                                cellString = strId.ToString();
+                                //普通字符串字段写入字符串表索引
+                                uint textIndex;
+                                if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
+                                {
+                                    textIndex = I18N.RegisterText(cellData.GetOriginalString(), false);
+                                }
+                                else
+                                {
+                                    textIndex = cellData.GetStringIndex();
+                                }
+                                memContent.Write(BitConverter.GetBytes((int)textIndex), 0, 4);
+                            }
+                        }
+                        else if (field.mType.Equals("double"))
+                        {
+                            //double类型
+                            string valueStr = cellData.IsBlank ? "0" : cellData.GetOriginalString();
+                            if (float.TryParse(valueStr, out float floatValue))
+                            {
+                                memContent.Write(BitConverter.GetBytes(floatValue), 0, 4);
+                            }
+                            else
+                            {
+                                throw new Exception("无法转换float值");
                             }
                         }
                         else
                         {
                             //int double 或者枚举值类型的单元格
-                            if (!cellData.IsBlank)
-                            {
-                                cellString = cellData.GetOriginalString();
-                            }
-                            else
-                            {
-                                cellString = "0";
-                            }
-                        }
-
-                        if (!field.mType.Equals("double"))
-                        {
-                            if (int.TryParse(cellString, out int intValue))
+                            string valueStr = cellData.IsBlank ? "0" : cellData.GetOriginalString();
+                            if (int.TryParse(valueStr, out int intValue))
                             {
                                 if (field.mType.Equals("centimeter"))
                                 {
@@ -110,17 +115,6 @@ namespace ExcelTool
                             else
                             {
                                 throw new Exception("无法转换int值");
-                            }
-                        }
-                        else
-                        {
-                            if (float.TryParse(cellString, out float floatValue))
-                            {
-                                memContent.Write(BitConverter.GetBytes(floatValue), 0, 4);
-                            }
-                            else
-                            {
-                                throw new Exception("无法转换float值");
                             }
                         }
                     }

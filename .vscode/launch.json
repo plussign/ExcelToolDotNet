@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
       "args": ["-extra_text"],
-      "cwd": "..\\Master\\Config",
+      "cwd": "..\\MasterI18N\\Config",
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "console": "integratedTerminal"
@@ -18,7 +18,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
       "args": ["-extra_text", "-clean_extra_text"],
-      "cwd": "..\\Master\\Config",
+      "cwd": "..\\MasterI18N\\Config",
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "console": "integratedTerminal"
@@ -29,7 +29,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/bin/Debug/net9.0/ExcelTool.exe",
       "args": [],
-      "cwd": "..\\Master\\Config",
+      "cwd": "..\\MasterI18N\\Config",
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "console": "integratedTerminal"
@@ -58,7 +58,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/bin/Release/net9.0/ExcelTool.exe",
       "args": [],
-      "cwd": "..\\Master\\Config",
+      "cwd": "..\\MasterI18N\\Config",
       "preLaunchTask": "build-release",
       "stopAtEntry": false,
       "console": "integratedTerminal"

@@ -206,23 +206,9 @@ MonoBehaviour:
         }
 
         //UILayout翻译数据
-        private static void writeUILayoutTable(string fileName, List<(string, string)> textDict)
+        private static void writeUILayoutTable(string fileName, List<UILayoutEntry> entries)
         {
-            var entries = new List<object>(textDict.Count);
-            foreach (var pair in textDict)
-            {
-                entries.Add(new
-                {
-                    text = pair.Item1,
-                    translation = pair.Item2
-                });
-            }
-
-            string json = JsonSerializer.Serialize(entries, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
+            string json = JsonSerializerHelper.SerializeUILayoutEntries(entries);
 
             DirectoryInfo languageTablePath = new DirectoryInfo("languageTables");
             if (languageTablePath.Exists)
@@ -409,7 +395,7 @@ MonoBehaviour:
                     string uilayoutTableName = string.Format("ui_{0}.json", languageCode);
                     Log.WriteLine("从翻译文件[{0}]生成国际化UILayout翻译数据(JSON)[{1}]", translatedFileName, uilayoutTableName);
 
-                    List<(string, string)> layoutTextListWithTranslation = new List<(string, string)>();
+                    List<UILayoutEntry> layoutTextListWithTranslation = new List<UILayoutEntry>();
                     for (int i = 0; i < layoutTextList.Count; ++i)
                     {
                         string originalText = layoutTextList[i];
@@ -423,7 +409,7 @@ MonoBehaviour:
                             //Log.WriteLine("词条[{0}]译文为空，使用原词条", originalText);
                             translated = originalText;
                         }
-                        layoutTextListWithTranslation.Add((originalText, translated));
+                        layoutTextListWithTranslation.Add(new UILayoutEntry { Text = originalText, Translation = translated });
                     }
 
                     //写入UILayout翻译语言表
@@ -455,12 +441,7 @@ MonoBehaviour:
             }
 
             string jsonText = File.ReadAllText(fileLayoutText.FullName, Encoding.UTF8);
-            var jsonOptions = new JsonSerializerOptions
-            {
-                AllowTrailingCommas = true,
-                ReadCommentHandling = JsonCommentHandling.Skip
-            };
-            var jsonList = JsonSerializer.Deserialize<List<string>>(jsonText, jsonOptions);
+            var jsonList = JsonSerializerHelper.DeserializeStringList(jsonText);
 
             if (jsonList != null)
             {

@@ -113,6 +113,25 @@ namespace ExcelTool
         // }
 
         private static string s_stringTableDefineScriptMeta = string.Empty;
+
+        private static readonly char[] s_yamlSpecialChars = new[]
+        {
+            '"', '\'', '\n', ':', '#', '|', '>', '!', '&', '*', '?', ',', '@', '`', '[', ']', '{', '}'
+        };
+        private static bool NeedsYamlQuoting(string s)
+        {
+            return s.IndexOfAny(s_yamlSpecialChars) >= 0
+                || s.StartsWith("-")
+                || s.StartsWith("%")
+                || s.StartsWith(" ")
+                || s.EndsWith(" ");
+        }
+
+        private static string EscapeYamlDoubleQuoted(string s)
+        {
+            return s.Replace("\\", "\\\\").Replace("\n", "\\n").Replace("\"", "\\\"");
+        }
+
         private static void writeScriptableObjectLanguageTable(string langCode, List<string> textList)
         {
             StringBuilder builder = new StringBuilder();
@@ -174,18 +193,9 @@ MonoBehaviour:
                 string s = textList[i];
                 RegisterSDFText(s);
 
-                if (s.Contains("\"") 
-                    || s.Contains("\n") 
-                    || s.Contains(":") 
-                    || s.Contains("#") 
-                    || s.Contains("|") 
-                    || s.Contains(">") 
-                    || s.Contains("[") 
-                    || s.Contains("]") 
-                    || s.Contains("{") 
-                    || s.Contains("}"))
+                if (NeedsYamlQuoting(s))
                 {
-                    s = s.Replace("\n", "\\n").Replace("\"", "\\\"");
+                    s = EscapeYamlDoubleQuoted(s);
                     s = "\"" + s + "\"";
                 }
 

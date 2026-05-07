@@ -248,9 +248,14 @@ namespace ExcelTool
                     List<CellDataForLua> clientSingleRawLine = new List<CellDataForLua>();
                     List<string> serverSingleRawLine = new List<string>();
 
-                    if (!ReadExcelRawLine(file, sheet, i, ref key, ref clientSingleRawLine, ref serverSingleRawLine))
+                    ReadRawLineResult readLineResult = ReadExcelRawLine(file, sheet, i, ref key, ref clientSingleRawLine, ref serverSingleRawLine);
+                    if (readLineResult == ReadRawLineResult.Error)
                     {
                         return false;
+                    }
+                    if (readLineResult == ReadRawLineResult.Skipped)
+                    {
+                        continue;
                     }
 
                     if (Program.i18nExtraOnly)

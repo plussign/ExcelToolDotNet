@@ -60,6 +60,11 @@ namespace ExcelTool
 
                     field.mType = node.GetAttribute("type");
                     field.isPrimary = node.GetAttribute("primary") == "true";
+                    string ignoreDuplicated = node.GetAttribute("ignore_duplicated").ToLower();
+                    field.ignore_duplicated = field.isPrimary
+                        && ignoreDuplicated.Length > 0
+                        && ignoreDuplicated != "false"
+                        && ignoreDuplicated != "0";
                     field.name = node.GetAttribute("name");
                     field.enum_value = node.GetAttribute("enum_value") == "true";
                     field.needLoadIntoMemory = node.GetAttribute("need_load") == "true";

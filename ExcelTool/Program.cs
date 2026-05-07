@@ -216,6 +216,7 @@ namespace ExcelTool
                 return -3;
             }
 
+            GlobeWarning.Report();
             GlobeInfo.Report();
 
             return 0;

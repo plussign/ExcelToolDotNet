@@ -10,6 +10,7 @@ namespace ExcelTool
         public string mType;
         public int srcSlot = 0;
         public bool isPrimary = false;
+        public bool ignore_duplicated = false;
         public bool enum_value = false;
         public string name;
         public int index = 0;

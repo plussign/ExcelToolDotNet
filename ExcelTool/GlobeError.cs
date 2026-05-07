@@ -27,6 +27,32 @@ namespace ExcelTool
         }
     }
 
+    class GlobeWarning
+    {
+        static public List<string> warningList = new List<string>();
+
+        static public void Push(string str)
+        {
+            warningList.Add(str);
+        }
+
+        static public void Report()
+        {
+            if (!Program.outputLog || warningList.Count <= 0)
+            {
+                return;
+            }
+
+            Console.WriteLine("---------警告----------");
+            foreach (string v in warningList)
+            {
+                Console.WriteLine(v);
+            }
+            Console.WriteLine("---------警告----------");
+            warningList.Clear();
+        }
+    }
+
     class GlobeError
     {
         static public List<string> errList = new List<string>();

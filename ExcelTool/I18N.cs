@@ -118,7 +118,7 @@ namespace ExcelTool
         {
             '"', '\'', '\n', ':', '#', '|', '>', '!', '&', '*', '?', ',', '@', '`', '[', ']', '{', '}'
         };
-        private static bool NeedsYamlQuoting(string s)
+        public static bool NeedsYamlQuoting(string s)
         {
             return s.IndexOfAny(s_yamlSpecialChars) >= 0
                 || s.StartsWith("-")
@@ -127,9 +127,29 @@ namespace ExcelTool
                 || s.EndsWith(" ");
         }
 
-        private static string EscapeYamlDoubleQuoted(string s)
+        public static string EscapeYamlDoubleQuoted(string s)
         {
             return s.Replace("\\", "\\\\").Replace("\n", "\\n").Replace("\"", "\\\"");
+        }
+
+        public static string ToYamlUnicodeEscapedDoubleQuoted(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return "\"\"";
+            }
+
+            StringBuilder builder = new StringBuilder(s.Length * 6 + 2);
+            builder.Append('"');
+
+            foreach (char c in s)
+            {
+                builder.Append("\\u");
+                builder.Append(((int)c).ToString("X4"));
+            }
+
+            builder.Append('"');
+            return builder.ToString();
         }
 
         private static void writeScriptableObjectLanguageTable(string langCode, List<string> textList)
@@ -190,16 +210,16 @@ MonoBehaviour:
 
             for (int i = 0; i < textList.Count; ++i)
             {
-                string s = textList[i];
-                RegisterSDFText(s);
+                string text = textList[i];
+                RegisterSDFText(text);
 
-                if (NeedsYamlQuoting(s))
+                if (NeedsYamlQuoting(text))
                 {
-                    s = EscapeYamlDoubleQuoted(s);
-                    s = "\"" + s + "\"";
+                    text = EscapeYamlDoubleQuoted(text);
+                    text = "\"" + text + "\"";
                 }
 
-                builder.AppendLine("  - " + s);
+                builder.AppendLine("  - " + text);
             }
 
             string scriptableObjectFilename = string.Format("output_asset/{0}.asset", tableNameWithLang);
@@ -411,12 +431,18 @@ MonoBehaviour:
                         string originalText = layoutTextList[i];
                         if (!translatedText.TryGetValue(originalText, out string translated))
                         {
-                            //Log.WriteLine("词条[{0}]没有译文，使用原词条", originalText);
+                            if (hasChinese(originalText))
+                            {
+                                GlobeWarning.Push($"[{languageCode}]词条[{originalText}]没有译文，使用原词条");
+                            }
                             translated = originalText;
                         }
                         else if (string.IsNullOrWhiteSpace(translated))
                         {
-                            //Log.WriteLine("词条[{0}]译文为空，使用原词条", originalText);
+                            if (hasChinese(originalText))
+                            {
+                                GlobeWarning.Push($"[{languageCode}]词条[{originalText}]译文为空，使用原词条");
+                            }
                             translated = originalText;
                         }
                         layoutTextListWithTranslation.Add(new UILayoutEntry { Text = originalText, Translation = translated });

@@ -25,7 +25,8 @@ namespace ExcelTool
                 {
                     if (field.raw_string)
                     {
-                        cellString = cellData.GetOriginalString();
+                        string originalString = cellData.GetOriginalString();
+                        cellString = I18N.ToYamlUnicodeEscapedDoubleQuoted(originalString);
                     }
                     else if (CellDataForLua.CellTypeForLua.Standard == cellData.type)
                     {
